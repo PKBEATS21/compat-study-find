@@ -1,0 +1,82 @@
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { GraduationCap, LogOut, User, BookOpen, Users } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "@/hooks/use-toast";
+
+export function Navbar() {
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Signed out successfully",
+      });
+      navigate("/");
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between">
+        <Link to="/" className="flex items-center gap-2 group">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform group-hover:scale-105">
+            <GraduationCap className="h-5 w-5" />
+          </div>
+          <span className="text-xl font-bold text-foreground">
+            StudyBuddy<span className="text-primary">Match</span>
+          </span>
+        </Link>
+
+        <nav className="flex items-center gap-2">
+          {loading ? (
+            <div className="h-9 w-24 animate-pulse rounded-lg bg-muted" />
+          ) : user ? (
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/subjects" className="flex items-center gap-2">
+                  <BookOpen className="h-4 w-4" />
+                  <span className="hidden sm:inline">Subjects</span>
+                </Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/matches" className="flex items-center gap-2">
+                  <Users className="h-4 w-4" />
+                  <span className="hidden sm:inline">Matches</span>
+                </Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/profile" className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  <span className="hidden sm:inline">Profile</span>
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleLogout}>
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline ml-2">Sign Out</span>
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/login">Sign In</Link>
+              </Button>
+              <Button variant="accent" size="sm" asChild>
+                <Link to="/register">Get Started</Link>
+              </Button>
+            </>
+          )}
+        </nav>
+      </div>
+    </header>
+  );
+}
