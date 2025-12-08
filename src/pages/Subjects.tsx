@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/landing/Footer";
 import { BookOpen, Plus, Trash2, Calendar, BarChart3, Loader2, Users, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -127,33 +128,34 @@ const Subjects = () => {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
-        <div className="flex items-center justify-center py-32">
+        <div className="flex-1 flex items-center justify-center py-32">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       
-      <main className="container py-8">
+      <main className="flex-1 container px-4 py-6 sm:py-8">
         <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
             <div>
-              <h1 className="text-3xl font-bold flex items-center gap-3">
-                <BookOpen className="h-8 w-8 text-primary" />
+              <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                 My Subjects
               </h1>
-              <p className="text-muted-foreground mt-1">
+              <p className="text-sm sm:text-base text-muted-foreground mt-1">
                 Add subjects you're studying to find matching partners
               </p>
             </div>
             {subjects.length > 0 && (
-              <Button variant="accent" asChild>
+              <Button variant="accent" asChild className="w-full sm:w-auto">
                 <Link to="/matches">
                   <Users className="h-4 w-4 mr-2" />
                   Find Matches
@@ -163,13 +165,13 @@ const Subjects = () => {
           </div>
 
           {/* Add Subject Form */}
-          <Card variant="elevated" className="mb-8">
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
+          <Card variant="elevated" className="mb-6 sm:mb-8">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-base sm:text-lg flex items-center gap-2">
                 <Plus className="h-5 w-5" />
                 Add a Subject
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-sm">
                 Enter your subject details to find study partners
               </CardDescription>
             </CardHeader>
@@ -184,6 +186,7 @@ const Subjects = () => {
                       value={subjectName}
                       onChange={(e) => setSubjectName(e.target.value)}
                       required
+                      className="w-full"
                     />
                   </div>
                   <div className="space-y-2">
@@ -193,13 +196,14 @@ const Subjects = () => {
                       type="date"
                       value={examDate}
                       onChange={(e) => setExamDate(e.target.value)}
+                      className="w-full"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="difficulty">Difficulty Level</Label>
                   <Select value={difficulty} onValueChange={setDifficulty}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select difficulty" />
                     </SelectTrigger>
                     <SelectContent>
@@ -211,7 +215,7 @@ const Subjects = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button type="submit" disabled={adding}>
+                <Button type="submit" disabled={adding} className="w-full sm:w-auto">
                   {adding ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
@@ -227,31 +231,31 @@ const Subjects = () => {
 
           {/* Subjects List */}
           {subjects.length === 0 ? (
-            <Card variant="bordered" className="text-center py-12">
+            <Card variant="bordered" className="text-center py-10 sm:py-12">
               <CardContent>
-                <BookOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No subjects yet</h3>
-                <p className="text-muted-foreground mb-4">
+                <BookOpen className="h-10 w-10 sm:h-12 sm:w-12 mx-auto text-muted-foreground mb-4" />
+                <h3 className="text-base sm:text-lg font-semibold mb-2">No subjects yet</h3>
+                <p className="text-sm text-muted-foreground mb-4">
                   Add your first subject above to start finding study partners.
                 </p>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-4">
-              <h2 className="text-lg font-semibold text-muted-foreground">
+              <h2 className="text-sm sm:text-base font-semibold text-muted-foreground">
                 {subjects.length} subject{subjects.length !== 1 ? "s" : ""} added
               </h2>
-              <div className="grid gap-4">
+              <div className="grid gap-3 sm:gap-4">
                 {subjects.map((subject) => (
                   <Card key={subject.id} variant="default" className="group hover:shadow-md transition-shadow">
                     <CardContent className="p-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-lg">{subject.subject_name}</h3>
-                          <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-base sm:text-lg truncate">{subject.subject_name}</h3>
+                          <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-muted-foreground">
                             {subject.exam_date && (
                               <div className="flex items-center gap-1">
-                                <Calendar className="h-4 w-4" />
+                                <Calendar className="h-4 w-4 flex-shrink-0" />
                                 <span>
                                   {new Date(subject.exam_date).toLocaleDateString("en-US", {
                                     month: "short",
@@ -262,7 +266,7 @@ const Subjects = () => {
                               </div>
                             )}
                             <div className="flex items-center gap-1">
-                              <BarChart3 className="h-4 w-4" />
+                              <BarChart3 className="h-4 w-4 flex-shrink-0" />
                               <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${difficultyLabels[subject.difficulty].color}`}>
                                 {difficultyLabels[subject.difficulty].label}
                               </span>
@@ -272,7 +276,7 @@ const Subjects = () => {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="opacity-0 group-hover:opacity-100 transition-opacity text-destructive hover:text-destructive hover:bg-destructive/10"
+                          className="flex-shrink-0 text-destructive hover:text-destructive hover:bg-destructive/10"
                           onClick={() => handleDeleteSubject(subject.id, subject.subject_name)}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -284,15 +288,15 @@ const Subjects = () => {
               </div>
 
               {/* CTA to find matches */}
-              <Card variant="glass" className="mt-8 gradient-hero p-6">
+              <Card variant="glass" className="mt-6 sm:mt-8 gradient-hero p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="text-primary-foreground text-center sm:text-left">
-                    <h3 className="text-lg font-semibold">Ready to find study partners?</h3>
+                    <h3 className="text-base sm:text-lg font-semibold">Ready to find study partners?</h3>
                     <p className="text-primary-foreground/80 text-sm">
                       We'll match you with students who share your subjects.
                     </p>
                   </div>
-                  <Button variant="hero" asChild>
+                  <Button variant="hero" asChild className="w-full sm:w-auto">
                     <Link to="/matches">
                       Find Matches
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -304,6 +308,8 @@ const Subjects = () => {
           )}
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };
