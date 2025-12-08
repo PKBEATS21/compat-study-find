@@ -13,6 +13,11 @@ import Subjects from "./pages/Subjects";
 import Matches from "./pages/Matches";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import Impressum from "./pages/Impressum";
+import Datenschutz from "./pages/Datenschutz";
+import Cookies from "./pages/Cookies";
+import AGB from "./pages/AGB";
+import Support from "./pages/Support";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +38,11 @@ const App = () => (
             <Route path="/matches" element={<Matches />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/impressum" element={<Impressum />} />
+            <Route path="/datenschutz" element={<Datenschutz />} />
+            <Route path="/cookies" element={<Cookies />} />
+            <Route path="/agb" element={<AGB />} />
+            <Route path="/support" element={<Support />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
