@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { User, MapPin, BookOpen, Calendar, Clock, Mail, ExternalLink, Loader2, Save, Building2, GraduationCap } from "lucide-react";
+import { User, MapPin, BookOpen, Calendar, Clock, Mail, ExternalLink, Loader2, Save, Building2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
@@ -167,52 +168,54 @@ const Profile = () => {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
-        <div className="flex items-center justify-center py-32">
+        <div className="flex-1 flex items-center justify-center py-32">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
+        <Footer />
       </div>
     );
   }
 
   if (!profile) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
-        <div className="container py-8 text-center">
-          <h1 className="text-2xl font-bold mb-4">Profile not found</h1>
-          <p className="text-muted-foreground">This user profile doesn't exist.</p>
+        <div className="flex-1 container px-4 py-8 text-center">
+          <h1 className="text-xl sm:text-2xl font-bold mb-4">Profile not found</h1>
+          <p className="text-sm text-muted-foreground">This user profile doesn't exist.</p>
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       
-      <main className="container py-8">
-        <div className="max-w-3xl mx-auto space-y-6">
+      <main className="flex-1 container px-4 py-6 sm:py-8">
+        <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
           {/* Header Card */}
           <Card variant="elevated" className="overflow-hidden">
-            <div className="h-24 gradient-hero" />
-            <CardContent className="relative pt-0">
-              <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4 -mt-12">
-                <div className="h-24 w-24 rounded-2xl bg-card shadow-lg border-4 border-card flex items-center justify-center text-3xl font-bold text-primary">
+            <div className="h-20 sm:h-24 gradient-hero" />
+            <CardContent className="relative pt-0 px-4 sm:px-6">
+              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 -mt-10 sm:-mt-12">
+                <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl bg-card shadow-lg border-4 border-card flex items-center justify-center text-2xl sm:text-3xl font-bold text-primary">
                   {profile.name?.charAt(0).toUpperCase() || "?"}
                 </div>
-                <div className="flex-1 pb-2">
-                  <h1 className="text-2xl font-bold">{profile.name || "Anonymous"}</h1>
-                  <div className="flex flex-wrap items-center gap-2 text-muted-foreground mt-1">
-                    <Building2 className="h-4 w-4" />
+                <div className="flex-1 text-center sm:text-left pb-2">
+                  <h1 className="text-xl sm:text-2xl font-bold">{profile.name || "Anonymous"}</h1>
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground mt-1">
+                    <Building2 className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span>{profile.university || "No university set"}</span>
                     <span>•</span>
                     <span>{profile.study_program || "No program set"}</span>
                     {profile.semester && (
                       <>
                         <span>•</span>
-                        <span>Semester {profile.semester}</span>
+                        <span>Sem {profile.semester}</span>
                       </>
                     )}
                   </div>
@@ -220,7 +223,9 @@ const Profile = () => {
                 {isOwnProfile && (
                   <Button
                     variant={editMode ? "default" : "outline"}
+                    size="sm"
                     onClick={() => setEditMode(!editMode)}
+                    className="w-full sm:w-auto"
                   >
                     {editMode ? "Cancel" : "Edit Profile"}
                   </Button>
@@ -232,58 +237,64 @@ const Profile = () => {
           {/* Edit Mode */}
           {editMode && editedProfile && (
             <Card variant="elevated">
-              <CardHeader>
-                <CardTitle>Edit Profile</CardTitle>
-                <CardDescription>Update your profile information</CardDescription>
+              <CardHeader className="pb-4">
+                <CardTitle className="text-base sm:text-lg">Edit Profile</CardTitle>
+                <CardDescription className="text-sm">Update your profile information</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label>Name</Label>
+                    <Label className="text-sm">Name</Label>
                     <Input
                       value={editedProfile.name}
                       onChange={(e) => setEditedProfile({ ...editedProfile, name: e.target.value })}
+                      className="w-full"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>University</Label>
+                    <Label className="text-sm">University</Label>
                     <Input
                       value={editedProfile.university}
                       onChange={(e) => setEditedProfile({ ...editedProfile, university: e.target.value })}
+                      className="w-full"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>City</Label>
+                    <Label className="text-sm">City</Label>
                     <Input
                       value={editedProfile.city}
                       onChange={(e) => setEditedProfile({ ...editedProfile, city: e.target.value })}
+                      className="w-full"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Study Program</Label>
+                    <Label className="text-sm">Study Program</Label>
                     <Input
                       value={editedProfile.study_program}
                       onChange={(e) => setEditedProfile({ ...editedProfile, study_program: e.target.value })}
+                      className="w-full"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Semester</Label>
+                    <Label className="text-sm">Semester</Label>
                     <Input
                       type="number"
                       value={editedProfile.semester || ""}
                       onChange={(e) => setEditedProfile({ ...editedProfile, semester: parseInt(e.target.value) || null })}
+                      className="w-full"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Contact Link (Discord, Telegram, etc.)</Label>
+                    <Label className="text-sm">Contact Link</Label>
                     <Input
                       value={editedProfile.contact_link}
                       onChange={(e) => setEditedProfile({ ...editedProfile, contact_link: e.target.value })}
                       placeholder="https://..."
+                      className="w-full"
                     />
                   </div>
                 </div>
-                <Button onClick={handleSaveProfile} disabled={saving}>
+                <Button onClick={handleSaveProfile} disabled={saving} className="w-full sm:w-auto">
                   {saving ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
@@ -298,25 +309,25 @@ const Profile = () => {
           )}
 
           {/* Info Cards */}
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
             {/* Location & Contact */}
             <Card variant="default">
-              <CardHeader>
-                <CardTitle className="text-lg">Contact & Location</CardTitle>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base sm:text-lg">Contact & Location</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <MapPin className="h-4 w-4" />
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <MapPin className="h-4 w-4 flex-shrink-0" />
                   <span>{profile.city || "No city set"}</span>
                 </div>
                 {!isOwnProfile && (
-                  <div className="flex gap-2 pt-2">
-                    <Button variant="default" size="sm">
+                  <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                    <Button variant="default" size="sm" className="w-full sm:w-auto">
                       <Mail className="h-4 w-4 mr-2" />
                       Send Email
                     </Button>
                     {profile.contact_link && (
-                      <Button variant="outline" size="sm" asChild>
+                      <Button variant="outline" size="sm" asChild className="w-full sm:w-auto">
                         <a href={profile.contact_link} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="h-4 w-4 mr-2" />
                           Contact Link
@@ -331,24 +342,24 @@ const Profile = () => {
             {/* Learning Preferences */}
             {preferences && (
               <Card variant="default">
-                <CardHeader>
-                  <CardTitle className="text-lg">Learning Style</CardTitle>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg">Learning Style</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <User className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex items-center gap-2 text-sm">
+                    <User className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                     <span className="font-medium">{learningStyleLabels[preferences.learning_style]}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex items-center gap-2 text-sm">
+                    <Clock className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                     <span>{preferences.availability.join(", ") || "Not set"}</span>
                   </div>
-                  <div className="flex gap-2 pt-2">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {preferences.prefers_online && (
-                      <Badge variant="secondary">Online</Badge>
+                      <Badge variant="secondary" className="text-xs">Online</Badge>
                     )}
                     {preferences.prefers_in_person && (
-                      <Badge variant="secondary">In-Person</Badge>
+                      <Badge variant="secondary" className="text-xs">In-Person</Badge>
                     )}
                   </div>
                 </CardContent>
@@ -359,8 +370,8 @@ const Profile = () => {
           {/* Subjects */}
           {subjects.length > 0 && (
             <Card variant="default">
-              <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base sm:text-lg flex items-center gap-2">
                   <BookOpen className="h-5 w-5" />
                   Subjects
                 </CardTitle>
@@ -372,11 +383,11 @@ const Profile = () => {
                       key={subject.id}
                       className="flex items-center justify-between p-3 rounded-lg bg-muted/50"
                     >
-                      <div>
-                        <div className="font-medium">{subject.subject_name}</div>
+                      <div className="min-w-0">
+                        <div className="font-medium text-sm truncate">{subject.subject_name}</div>
                         {subject.exam_date && (
                           <div className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-                            <Calendar className="h-3 w-3" />
+                            <Calendar className="h-3 w-3 flex-shrink-0" />
                             {new Date(subject.exam_date).toLocaleDateString()}
                           </div>
                         )}
@@ -389,6 +400,8 @@ const Profile = () => {
           )}
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };

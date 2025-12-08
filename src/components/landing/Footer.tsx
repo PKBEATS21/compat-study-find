@@ -14,9 +14,9 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border/50 bg-muted/30 py-10">
-      <div className="container px-4 md:px-6">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <footer className="border-t border-border/50 bg-muted/30 py-8 sm:py-10">
+      <div className="container px-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           {/* App Information */}
           <div className="space-y-3">
             <Link to="/" className="inline-flex items-center gap-2">
@@ -40,7 +40,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors py-1"
                 >
                   {link.name}
                 </Link>
