@@ -37,7 +37,6 @@ const App = () => (
             <Route path="/subjects" element={<Subjects />} />
             <Route path="/matches" element={<Matches />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/cookies" element={<Cookies />} />
