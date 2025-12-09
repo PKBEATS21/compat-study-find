@@ -121,7 +121,25 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      find_study_matches: {
+        Args: { requesting_user_id: string }
+        Returns: {
+          availability: Json
+          city: string
+          contact_link: string
+          id: string
+          learning_style: string
+          match_score: number
+          name: string
+          prefers_in_person: boolean
+          prefers_online: boolean
+          semester: number
+          shared_subjects: string[]
+          study_program: string
+          university: string
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

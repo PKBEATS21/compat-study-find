@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { User, MapPin, BookOpen, Calendar, Clock, Mail, ExternalLink, Loader2, Save, Building2 } from "lucide-react";
+import { MapPin, BookOpen, Calendar, Clock, Loader2, Save, Building2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
@@ -43,13 +43,11 @@ const learningStyleLabels: Record<string, string> = {
 };
 
 const Profile = () => {
-  const { id } = useParams();
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [preferences, setPreferences] = useState<PreferencesData | null>(null);
   const [subjects, setSubjects] = useState<SubjectData[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [isOwnProfile, setIsOwnProfile] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editedProfile, setEditedProfile] = useState<ProfileData | null>(null);
   const navigate = useNavigate();
@@ -63,18 +61,17 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      const targetUserId = id || user.id;
-      setIsOwnProfile(!id || id === user.id);
-      fetchProfileData(targetUserId);
+      fetchProfileData();
     }
-  }, [user, id]);
+  }, [user]);
 
-  const fetchProfileData = async (userId: string) => {
+  const fetchProfileData = async () => {
     try {
+      // Fetch only the current user's own data
       const { data: profileData, error: profileError } = await supabase
         .from("profiles")
         .select("*")
-        .eq("user_id", userId)
+        .eq("user_id", user?.id)
         .maybeSingle();
 
       if (profileError) throw profileError;
@@ -82,7 +79,7 @@ const Profile = () => {
       const { data: prefsData, error: prefsError } = await supabase
         .from("preferences")
         .select("*")
-        .eq("user_id", userId)
+        .eq("user_id", user?.id)
         .maybeSingle();
 
       if (prefsError) throw prefsError;
@@ -90,7 +87,7 @@ const Profile = () => {
       const { data: subjectsData, error: subjectsError } = await supabase
         .from("subjects")
         .select("*")
-        .eq("user_id", userId);
+        .eq("user_id", user?.id);
 
       if (subjectsError) throw subjectsError;
 
@@ -117,8 +114,8 @@ const Profile = () => {
         setPreferences({
           learning_style: prefsData.learning_style || "calm",
           availability: (prefsData.availability as string[]) || [],
-          prefers_online: prefsData.prefers_online,
-          prefers_in_person: prefsData.prefers_in_person,
+          prefers_online: prefsData.prefers_online ?? true,
+          prefers_in_person: prefsData.prefers_in_person ?? false,
         });
       }
 
@@ -184,7 +181,8 @@ const Profile = () => {
         <Navbar />
         <div className="flex-1 container px-4 py-8 text-center">
           <h1 className="text-xl sm:text-2xl font-bold mb-4">Profile not found</h1>
-          <p className="text-sm text-muted-foreground">This user profile doesn't exist.</p>
+          <p className="text-sm text-muted-foreground mb-4">Your profile hasn't been set up yet.</p>
+          <Button onClick={() => navigate("/onboarding")}>Complete Onboarding</Button>
         </div>
         <Footer />
       </div>
@@ -220,16 +218,14 @@ const Profile = () => {
                     )}
                   </div>
                 </div>
-                {isOwnProfile && (
-                  <Button
-                    variant={editMode ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setEditMode(!editMode)}
-                    className="w-full sm:w-auto"
-                  >
-                    {editMode ? "Cancel" : "Edit Profile"}
-                  </Button>
-                )}
+                <Button
+                  variant={editMode ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setEditMode(!editMode)}
+                  className="w-full sm:w-auto"
+                >
+                  {editMode ? "Cancel" : "Edit Profile"}
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -313,29 +309,13 @@ const Profile = () => {
             {/* Location & Contact */}
             <Card variant="default">
               <CardHeader className="pb-3">
-                <CardTitle className="text-base sm:text-lg">Contact & Location</CardTitle>
+                <CardTitle className="text-base sm:text-lg">Location</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <MapPin className="h-4 w-4 flex-shrink-0" />
                   <span>{profile.city || "No city set"}</span>
                 </div>
-                {!isOwnProfile && (
-                  <div className="flex flex-col sm:flex-row gap-2 pt-2">
-                    <Button variant="default" size="sm" className="w-full sm:w-auto">
-                      <Mail className="h-4 w-4 mr-2" />
-                      Send Email
-                    </Button>
-                    {profile.contact_link && (
-                      <Button variant="outline" size="sm" asChild className="w-full sm:w-auto">
-                        <a href={profile.contact_link} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Contact Link
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                )}
               </CardContent>
             </Card>
 
@@ -347,7 +327,6 @@ const Profile = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-2 text-sm">
-                    <User className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                     <span className="font-medium">{learningStyleLabels[preferences.learning_style]}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
