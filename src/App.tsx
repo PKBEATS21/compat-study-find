@@ -20,6 +20,9 @@ import Datenschutz from "./pages/Datenschutz";
 import Cookies from "./pages/Cookies";
 import AGB from "./pages/AGB";
 import Support from "./pages/Support";
+import DemoSubjects from "./pages/demo/DemoSubjects";
+import DemoMatches from "./pages/demo/DemoMatches";
+import DemoProfile from "./pages/demo/DemoProfile";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +48,9 @@ const App = () => (
               <Route path="/cookies" element={<Cookies />} />
               <Route path="/agb" element={<AGB />} />
               <Route path="/support" element={<Support />} />
+              <Route path="/demo/subjects" element={<DemoSubjects />} />
+              <Route path="/demo/matches" element={<DemoMatches />} />
+              <Route path="/demo/profile" element={<DemoProfile />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <CookieConsent />
