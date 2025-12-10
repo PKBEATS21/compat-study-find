@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { GraduationCap } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useCookieConsent } from "@/contexts/CookieConsentContext";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { openConsentBanner } = useCookieConsent();
 
   const legalLinks = [
     { name: "Impressum", href: "/impressum" },
@@ -45,6 +47,12 @@ export function Footer() {
                   {link.name}
                 </Link>
               ))}
+              <button
+                onClick={openConsentBanner}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors py-1 text-left"
+              >
+                Manage Cookies
+              </button>
             </nav>
           </div>
         </div>
