@@ -63,6 +63,15 @@ export function Hero() {
             </Button>
           </div>
 
+          {/* Demo Mode Button */}
+          <div className="mt-4 animate-slide-up" style={{ animationDelay: "0.25s" }}>
+            <Button variant="link" size="sm" asChild className="text-primary-foreground/70 hover:text-primary-foreground">
+              <Link to="/demo/subjects">
+                Explore Demo Mode →
+              </Link>
+            </Button>
+          </div>
+
           {/* Stats */}
           <div className="mt-12 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8 animate-slide-up" style={{ animationDelay: "0.3s" }}>
             {[
