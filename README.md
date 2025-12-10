@@ -1,73 +1,79 @@
-# Welcome to your Lovable project
+# 📚 StudyBuddy Match  
+**Find your perfect study partner in minutes.**  
+Live App: https://studddybuddymatch.de  
 
-## Project info
+---
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🚀 About the Project  
+StudyBuddy Match helps students find compatible learning partners based on subjects, exam dates, learning style, and availability.
 
-## How can I edit this code?
+The goal:  
+Enable students to *study smarter*, stay motivated, and learn more effectively by connecting them with people who truly match their needs.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 🎯 Problem  
+Studying alone is often inefficient and demotivating.  
+Existing student platforms do NOT consider:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- different learning styles  
+- varying schedules  
+- subject compatibility  
+- exam deadlines  
+- learning preferences (online/in-person)
 
-Changes made via Lovable will be committed automatically to this repo.
+➡️ Students struggle to find the *right* learning partner — even though it boosts performance dramatically.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 💡 Our Solution  
+StudyBuddy Match analyzes each student’s:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+✔ Subjects & exam dates  
+✔ Learning style  
+✔ Weekly availability  
+✔ Online/in-person preference  
+✔ City (for in-person studying)
 
-Follow these steps:
+Then it uses a secure, weighted matching algorithm to generate **highly compatible study partner suggestions**.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🔍 Matching Algorithm (Simplified)  
+Our backend uses a secure **Supabase RPC function**:
 
-# Step 3: Install the necessary dependencies.
-npm i
+Matches are ranked based on:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+| Criterion | Weight |
+|----------|---------|
+| Shared subjects | 30 pts each |
+| Availability overlap | 10 pts each |
+| Same learning style | 20 pts |
+| Same city (in-person) | 15 pts |
 
-**Edit a file directly in GitHub**
+Security ensured by:  
+- Full RLS (Row Level Security)  
+- Profiles, preferences, subjects only readable by the owner  
+- A secure `SECURITY DEFINER` RPC exposes only match results  
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 🧩 Features
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### ✅ MVP Features  
+- User registration & login  
+- Onboarding (profile + learning preferences)  
+- Manage subjects and exam dates  
+- Full matching system with compatibility scores  
+- Mobile-first responsive UI  
+- Profile view  
+- Footer with legal pages  
+- Custom domain deployment  
 
-## What technologies are used for this project?
+### 📌 Additional Features  
+- Support page with contact form  
+- Clean, modern UI with Tailwind + shadcn components  
+- Fully responsive mobile layout  
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
