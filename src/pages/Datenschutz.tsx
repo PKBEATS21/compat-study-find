@@ -6,15 +6,15 @@ export default function Datenschutz() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="flex-1 container px-4 py-12 md:py-16">
+      <main className="flex-1 container px-4 py-8 md:py-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Datenschutzerklärung</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Datenschutzerklärung</h1>
           
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">1. Datenschutz auf einen Blick</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">1. Datenschutz auf einen Blick</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <h4 className="font-semibold text-foreground">Allgemeine Hinweise</h4>
               <p>
                 Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren 
@@ -23,11 +23,11 @@ export default function Datenschutz() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">2. Datenerfassung auf dieser Website</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">2. Datenerfassung auf dieser Website</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <h4 className="font-semibold text-foreground">Wer ist verantwortlich für die Datenerfassung?</h4>
               <p>
                 Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. 
@@ -41,11 +41,11 @@ export default function Datenschutz() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">3. Cookies</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">3. Cookies</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Textdateien 
                 und richten auf Ihrem Endgerät keinen Schaden an.
@@ -56,13 +56,13 @@ export default function Datenschutz() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">4. Ihre Rechte</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">4. Ihre Rechte</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>Sie haben jederzeit das Recht:</p>
-              <ul className="list-disc list-inside space-y-1">
+              <ul className="list-disc list-inside space-y-2 pl-1">
                 <li>Auskunft über Ihre gespeicherten Daten zu erhalten</li>
                 <li>Berichtigung unrichtiger Daten zu verlangen</li>
                 <li>Löschung Ihrer Daten zu verlangen</li>
@@ -74,10 +74,10 @@ export default function Datenschutz() {
           </Card>
 
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">5. Speicherdauer</CardTitle>
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">5. Speicherdauer</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Wir speichern Ihre personenbezogenen Daten nur so lange, wie es für die Erfüllung 
                 der Zwecke erforderlich ist oder wie es gesetzliche Aufbewahrungsfristen vorsehen.

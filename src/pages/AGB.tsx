@@ -6,15 +6,15 @@ export default function AGB() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="flex-1 container px-4 py-12 md:py-16">
+      <main className="flex-1 container px-4 py-8 md:py-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Allgemeine Geschäftsbedingungen</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Allgemeine Geschäftsbedingungen</h1>
           
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">§ 1 Geltungsbereich</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">§ 1 Geltungsbereich</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Diese Allgemeinen Geschäftsbedingungen gelten für die Nutzung der StudyBuddy Match 
                 Plattform. Mit der Registrierung erkennen Sie diese Bedingungen an.
@@ -22,11 +22,11 @@ export default function AGB() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">§ 2 Leistungsbeschreibung</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">§ 2 Leistungsbeschreibung</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 StudyBuddy Match ist eine Plattform zur Vermittlung von Lernpartnern. Wir stellen 
                 die technische Infrastruktur bereit, um Studenten mit kompatiblen Lernpartnern zu verbinden.
@@ -34,11 +34,11 @@ export default function AGB() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">§ 3 Registrierung und Nutzerkonto</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">§ 3 Registrierung und Nutzerkonto</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Für die Nutzung unserer Dienste ist eine Registrierung erforderlich. Sie sind 
                 verpflichtet, wahrheitsgemäße Angaben zu machen und Ihre Zugangsdaten geheim zu halten.
@@ -46,13 +46,13 @@ export default function AGB() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">§ 4 Nutzerpflichten</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">§ 4 Nutzerpflichten</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>Als Nutzer verpflichten Sie sich:</p>
-              <ul className="list-disc list-inside space-y-1">
+              <ul className="list-disc list-inside space-y-2 pl-1">
                 <li>Keine falschen Angaben zu machen</li>
                 <li>Keine rechtswidrigen Inhalte zu verbreiten</li>
                 <li>Andere Nutzer respektvoll zu behandeln</li>
@@ -61,11 +61,11 @@ export default function AGB() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">§ 5 Haftung</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">§ 5 Haftung</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Wir haften nicht für die Inhalte und das Verhalten der Nutzer. Die Vermittlung 
                 von Lernpartnern erfolgt ohne Gewähr. Wir übernehmen keine Garantie für den 
@@ -75,10 +75,10 @@ export default function AGB() {
           </Card>
 
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">§ 6 Kündigung</CardTitle>
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">§ 6 Kündigung</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Sie können Ihr Konto jederzeit löschen. Wir behalten uns das Recht vor, Konten 
                 bei Verstößen gegen diese AGB zu sperren oder zu löschen.

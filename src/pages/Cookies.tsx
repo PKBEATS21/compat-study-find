@@ -7,15 +7,15 @@ export default function Cookies() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="flex-1 container px-4 py-12 md:py-16">
+      <main className="flex-1 container px-4 py-8 md:py-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Cookie-Richtlinien</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">Cookie-Richtlinien</h1>
           
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">Was sind Cookies?</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">Was sind Cookies?</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Cookies sind kleine Textdateien, die auf Ihrem Computer oder Mobilgerät gespeichert werden, 
                 wenn Sie unsere Website besuchen. Sie helfen uns, Ihre Einstellungen zu speichern und 
@@ -24,11 +24,11 @@ export default function Cookies() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">Welche Cookies verwenden wir?</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">Welche Cookies verwenden wir?</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <h4 className="font-semibold text-foreground">Notwendige Cookies</h4>
               <p>
                 Diese Cookies sind für den Betrieb der Website unerlässlich. Sie ermöglichen grundlegende 
@@ -49,11 +49,11 @@ export default function Cookies() {
             </CardContent>
           </Card>
 
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="text-lg">Wie können Sie Cookies verwalten?</CardTitle>
+          <Card className="mb-4 md:mb-6">
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">Wie können Sie Cookies verwalten?</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Sie können Ihre Browser-Einstellungen so ändern, dass Cookies blockiert oder 
                 gelöscht werden. Beachten Sie jedoch, dass einige Funktionen unserer Website 
@@ -63,10 +63,10 @@ export default function Cookies() {
           </Card>
 
           <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Weitere Informationen</CardTitle>
+            <CardHeader className="pb-3 md:pb-4">
+              <CardTitle className="text-base md:text-lg">Weitere Informationen</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 text-muted-foreground text-sm">
+            <CardContent className="space-y-4 text-muted-foreground text-base leading-relaxed">
               <p>
                 Weitere Informationen zum Datenschutz finden Sie in unserer{" "}
                 <Link to="/datenschutz" className="text-primary hover:underline">
