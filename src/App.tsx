@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { CookieConsentProvider } from "@/contexts/CookieConsentContext";
 import { CookieConsent } from "@/components/CookieConsent";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -27,38 +28,45 @@ import DemoProfile from "./pages/demo/DemoProfile";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <CookieConsentProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/onboarding" element={<Onboarding />} />
-              <Route path="/preferences" element={<Preferences />} />
-              <Route path="/subjects" element={<Subjects />} />
-              <Route path="/matches" element={<Matches />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/impressum" element={<Impressum />} />
-              <Route path="/datenschutz" element={<Datenschutz />} />
-              <Route path="/cookies" element={<Cookies />} />
-              <Route path="/agb" element={<AGB />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/demo/subjects" element={<DemoSubjects />} />
-              <Route path="/demo/matches" element={<DemoMatches />} />
-              <Route path="/demo/profile" element={<DemoProfile />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <CookieConsent />
-          </BrowserRouter>
-        </TooltipProvider>
-      </CookieConsentProvider>
-    </AuthProvider>
-  </QueryClientProvider>
+  <ThemeProvider
+    attribute="class"
+    defaultTheme="system"
+    enableSystem
+    disableTransitionOnChange
+  >
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <CookieConsentProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/onboarding" element={<Onboarding />} />
+                <Route path="/preferences" element={<Preferences />} />
+                <Route path="/subjects" element={<Subjects />} />
+                <Route path="/matches" element={<Matches />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/impressum" element={<Impressum />} />
+                <Route path="/datenschutz" element={<Datenschutz />} />
+                <Route path="/cookies" element={<Cookies />} />
+                <Route path="/agb" element={<AGB />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/demo/subjects" element={<DemoSubjects />} />
+                <Route path="/demo/matches" element={<DemoMatches />} />
+                <Route path="/demo/profile" element={<DemoProfile />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <CookieConsent />
+            </BrowserRouter>
+          </TooltipProvider>
+        </CookieConsentProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;

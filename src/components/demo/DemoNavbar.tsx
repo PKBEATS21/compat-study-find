@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, BookOpen, Users, User, LogIn } from "lucide-react";
 import { useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function DemoNavbar() {
   const [open, setOpen] = useState(false);
@@ -66,6 +67,7 @@ export function DemoNavbar() {
         <nav className="hidden md:flex items-center gap-1">
           <NavLinks />
           <div className="h-4 w-px bg-border mx-2" />
+          <ThemeToggle />
           <Button size="sm" asChild>
             <Link to="/register">
               <LogIn className="h-4 w-4 mr-2" />
@@ -75,25 +77,28 @@ export function DemoNavbar() {
         </nav>
 
         {/* Mobile Navigation */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[280px] pt-10">
-            <nav className="flex flex-col gap-2">
-              <NavLinks mobile />
-              <div className="h-px bg-border my-2" />
-              <Button asChild className="w-full">
-                <Link to="/register" onClick={() => setOpen(false)}>
-                  <LogIn className="h-4 w-4 mr-2" />
-                  Sign Up for Full Access
-                </Link>
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-5 w-5" />
               </Button>
-            </nav>
-          </SheetContent>
-        </Sheet>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[280px] pt-10">
+              <nav className="flex flex-col gap-2">
+                <NavLinks mobile />
+                <div className="h-px bg-border my-2" />
+                <Button asChild className="w-full">
+                  <Link to="/register" onClick={() => setOpen(false)}>
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Sign Up for Full Access
+                  </Link>
+                </Button>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

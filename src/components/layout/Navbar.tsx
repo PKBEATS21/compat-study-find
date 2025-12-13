@@ -6,6 +6,7 @@ import { GraduationCap, LogOut, User, BookOpen, Users, Menu } from "lucide-react
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar() {
   const { user, loading } = useAuth();
@@ -93,6 +94,7 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
           {loading ? (
             <div className="h-9 w-24 animate-pulse rounded-lg bg-muted" />
           ) : user ? (
@@ -133,7 +135,8 @@ export function Navbar() {
         </nav>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
           {loading ? (
             <div className="h-9 w-9 animate-pulse rounded-lg bg-muted" />
           ) : user ? (
