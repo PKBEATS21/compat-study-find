@@ -12,11 +12,11 @@ import { demoSubjects } from "@/data/demo/demoData";
 import { toast } from "@/hooks/use-toast";
 
 const difficultyLabels: Record<number, { label: string; color: string }> = {
-  1: { label: "Easy", color: "bg-green-100 text-green-700" },
-  2: { label: "Moderate", color: "bg-lime-100 text-lime-700" },
-  3: { label: "Medium", color: "bg-yellow-100 text-yellow-700" },
-  4: { label: "Hard", color: "bg-orange-100 text-orange-700" },
-  5: { label: "Very Hard", color: "bg-red-100 text-red-700" },
+  1: { label: "Easy", color: "bg-green-500/10 text-green-600 dark:text-green-400" },
+  2: { label: "Moderate", color: "bg-lime-500/10 text-lime-600 dark:text-lime-400" },
+  3: { label: "Medium", color: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400" },
+  4: { label: "Hard", color: "bg-orange-500/10 text-orange-600 dark:text-orange-400" },
+  5: { label: "Very Hard", color: "bg-red-500/10 text-red-600 dark:text-red-400" },
 };
 
 const DemoSubjects = () => {
