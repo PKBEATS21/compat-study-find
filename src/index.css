@@ -46,6 +46,9 @@
     --gradient-accent: linear-gradient(135deg, hsl(16 90% 60%) 0%, hsl(25 95% 53%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(210 30% 95%) 100%);
     
+    /* Touch-friendly sizing */
+    --min-touch-target: 44px;
+    
     --shadow-sm: 0 1px 2px 0 hsl(215 28% 17% / 0.05);
     --shadow-md: 0 4px 6px -1px hsl(215 28% 17% / 0.08), 0 2px 4px -2px hsl(215 28% 17% / 0.05);
     --shadow-lg: 0 10px 15px -3px hsl(215 28% 17% / 0.08), 0 4px 6px -4px hsl(215 28% 17% / 0.05);
@@ -100,6 +103,14 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Dark mode gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(187 80% 35%) 0%, hsl(199 80% 40%) 50%, hsl(187 80% 35%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(215 28% 15%) 0%, hsl(215 28% 13%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(215 28% 12%) 0%, hsl(215 28% 10%) 100%);
+    
+    /* Touch-friendly sizing */
+    --min-touch-target: 44px;
   }
 }
 
