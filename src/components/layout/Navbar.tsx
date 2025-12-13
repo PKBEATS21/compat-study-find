@@ -2,16 +2,19 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { GraduationCap, LogOut, User, BookOpen, Users, Menu } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { GraduationCap, LogOut, User, BookOpen, Users, Menu, Moon, Sun } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useTheme } from "next-themes";
 
 export function Navbar() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -28,6 +31,12 @@ export function Navbar() {
       setOpen(false);
       navigate("/");
     }
+  };
+
+  const isDarkMode = resolvedTheme === "dark";
+
+  const handleThemeToggle = () => {
+    setTheme(isDarkMode ? "light" : "dark");
   };
 
   const NavLinks = ({ mobile = false }: { mobile?: boolean }) => (
@@ -78,6 +87,29 @@ export function Navbar() {
         <span className="ml-2">Sign Out</span>
       </Button>
     </>
+  );
+
+  const MobileThemeToggle = () => (
+    <div 
+      className="flex items-center justify-between w-full min-h-[44px] px-4 py-3 rounded-lg bg-muted/50 cursor-pointer touch-manipulation"
+      onClick={handleThemeToggle}
+      role="button"
+      aria-label="Toggle dark mode"
+    >
+      <div className="flex items-center gap-3">
+        {isDarkMode ? (
+          <Moon className="h-5 w-5 text-primary" />
+        ) : (
+          <Sun className="h-5 w-5 text-primary" />
+        )}
+        <span className="text-sm font-medium">Dark Mode</span>
+      </div>
+      <Switch 
+        checked={isDarkMode} 
+        onCheckedChange={() => setTheme(isDarkMode ? "light" : "dark")}
+        aria-label="Toggle dark mode"
+      />
+    </div>
   );
 
   return (
@@ -136,31 +168,49 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
           {loading ? (
             <div className="h-9 w-9 animate-pulse rounded-lg bg-muted" />
           ) : user ? (
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="h-10 w-10 min-h-[44px] min-w-[44px]">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-72 pt-12">
-                <nav className="flex flex-col gap-2">
+              <SheetContent side="right" className="w-72 pt-12 flex flex-col">
+                <nav className="flex flex-col gap-2 flex-1">
                   <NavLinks mobile />
                 </nav>
+                
+                {/* Theme Toggle at bottom */}
+                <div className="pt-4 border-t border-border">
+                  <MobileThemeToggle />
+                </div>
               </SheetContent>
             </Sheet>
           ) : (
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/login">Sign In</Link>
-              </Button>
-              <Button variant="accent" size="sm" asChild>
-                <Link to="/register">Start</Link>
-              </Button>
-            </div>
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-10 w-10 min-h-[44px] min-w-[44px]">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-72 pt-12 flex flex-col">
+                <nav className="flex flex-col gap-2 flex-1">
+                  <Button variant="ghost" size="lg" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+                    <Link to="/login">Sign In</Link>
+                  </Button>
+                  <Button variant="accent" size="lg" asChild className="w-full justify-start" onClick={() => setOpen(false)}>
+                    <Link to="/register">Get Started</Link>
+                  </Button>
+                </nav>
+                
+                {/* Theme Toggle at bottom */}
+                <div className="pt-4 border-t border-border">
+                  <MobileThemeToggle />
+                </div>
+              </SheetContent>
+            </Sheet>
           )}
         </div>
       </div>
